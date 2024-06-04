@@ -1,11 +1,18 @@
 import { Api } from "../axios-config";
 
-export const loginApi = async (username: string, password: string): Promise<string | Error> => {
+interface List {
+    title: string,
+    description: string,
+    status: string,
+    creation: string
+}
+
+export const updateItems = async (item: List, id: number): Promise<List[] | Error> => {
     try{
-        const { data } = await Api.post('/login', {username, password});
+        const { data } = await Api.put(`/items/${id}`, item);
         
         if(data)
-            return data.token;
+            return data;
         else
             return new Error('Credenciais inválidas')
 

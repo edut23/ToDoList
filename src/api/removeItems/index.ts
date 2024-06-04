@@ -1,11 +1,11 @@
 import { Api } from "../axios-config";
 
-export const registerApi = async (username: string, password: string): Promise<string | Error> => {''
+export const removeItemsAPI = async (id: number): Promise<string | Error> => {
     try{
-        const { data } = await Api.post('/register', {username, password});
+        const { data } = await Api.delete(`/items/${id}`);
         
         if(data)
-            return data.access_token;
+            return data;
         else
             return new Error('Credenciais inválidas')
 

@@ -1,17 +1,20 @@
-import React, { createContext, useState, ReactNode, useContext, useMemo } from 'react';
+import React, { createContext, useState, ReactNode, useContext, useMemo, useEffect } from 'react';
 
-interface ToDo{
+interface List{
+  itemid: number
   title: string
   description: string
   status: string
-  timestamp: number
+  creation: string
 }
 
 interface MyContextType {
     token: string;
     setToken: React.Dispatch<React.SetStateAction<string>>,
-    toDoList: ToDo[],
-    setToDoList: React.Dispatch<React.SetStateAction<ToDo[]>>,
+    toDoList: List[],
+    setToDoList: React.Dispatch<React.SetStateAction<List[]>>,
+    modal: boolean | number,
+    setModal: React.Dispatch<React.SetStateAction<boolean | number>>
   }
   
   const defaultState: MyContextType = {
@@ -19,6 +22,8 @@ interface MyContextType {
     setToken: () => {},
     toDoList: [],
     setToDoList: () => {},
+    modal: false,
+    setModal: () => {},
   };
 
 export const MyContext = createContext<MyContextType>(defaultState);
@@ -29,10 +34,17 @@ interface MyProviderProps {
 
 export const MyProvider: React.FC<MyProviderProps> = ({ children }) => {
 
-    const [token, setToken] = useState<string>('')
-    const [toDoList, setToDoList] = useState<ToDo[]>([])
+    const [token, setToken] = useState<string>(localStorage.getItem("token") ?? '');
+    const [toDoList, setToDoList] = useState<List[]>([]);
+    const [modal, setModal] = useState<boolean | number>(false);
 
-    const memoBrand = useMemo(() => ({token, setToken, toDoList, setToDoList}),[token, toDoList])
+    useEffect(() => {
+      if(token !== ''){
+        localStorage.setItem("token", token);
+      }
+    },[token])
+
+    const memoBrand = useMemo(() => ({token, setToken, toDoList, setToDoList, modal, setModal}),[token, toDoList, modal])
 
 
     return (

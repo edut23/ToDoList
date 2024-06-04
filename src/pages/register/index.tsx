@@ -1,26 +1,28 @@
 import { Formik } from "formik";
 import React from "react";
-import useLogin from "../../hooks/useLogin"
+import useRegister from "../../hooks/useRegister";
 import { Link } from "react-router-dom";
 
-const Login: React.FC = () => {
-    const { handleSubmitLogin } = useLogin();
+const Register: React.FC = () => {
+    const { handleSubmitRegister } = useRegister();
 
     return(
         <div className="input">
-            <h2>Login</h2>
+            <h2>Sign Up</h2>
             <Formik
                 initialValues={{ username: '', password: '' }}
                 validate={values => {
-                    const errors = {username: '', password: '' };
+                    const errors = {username: '', password: ''};
                     if (!values.username)
                         errors.username = 'Required';
                     else if (!values.password)
                         errors.password = 'Required';
+                    else if (values.password.length < 6)
+                        errors.password = 'Minimum 6 characters'
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                    handleSubmitLogin(values);
+                    handleSubmitRegister(values);
                     setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
                         setSubmitting(false);
@@ -34,7 +36,7 @@ const Login: React.FC = () => {
                     handleChange,
                     handleBlur,
                 }) => (
-                    <form className="form" onSubmit={(e) => { e.preventDefault(); handleSubmitLogin(values); }}>
+                    <form className="form" onSubmit={(e) => { e.preventDefault(); handleSubmitRegister(values); }}>
                     <label>Username</label>
                     <input
                         type="username"
@@ -53,15 +55,15 @@ const Login: React.FC = () => {
                         value={values.password}
                     />
                     <p style={{visibility: `${errors.password && touched.password && errors.password ? "visible" : "hidden"}`}}>{errors.password}</p>
-                    <button type="submit" disabled={(values.username === '') || (values.password === '')}>
+                    <button type="submit" disabled={(values.username === '') || (values.password === '') || (errors.password !== '')}>
                         Submit
                     </button>
                     </form>
                 )}
             </Formik>
-            <Link to="/register"><p>Sign Up</p></Link>
+            <Link to="/"><p>Login</p></Link>
         </div>
     )
 }
 
-export default Login;
+export default Register;
