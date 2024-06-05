@@ -1,12 +1,9 @@
 Projec already deployed (https://vercel.com/edut23s-projects/to-do-list/5rZ4NkPuxPTnTkKzZfVGc8Bd6Qaq)
 
-# Getting Started with Create React App
+Intall node packages with
+### `npm install`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+and run application with
 
 ### `npm start`
 
