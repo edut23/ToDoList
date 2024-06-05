@@ -61,7 +61,7 @@ const Register: React.FC = () => {
                     </form>
                 )}
             </Formik>
-            <Link to="/"><p>Login</p></Link>
+            <p>Already have a account? <Link to="/">Login here!</Link></p>
         </div>
     )
 }

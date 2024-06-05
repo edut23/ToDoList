@@ -20,7 +20,7 @@ function App() {
             <Route path="/list" element={localStorage.getItem("token") !== null ? <List/> : <Navigate to="/" replace/>}/>
           </Routes>
         </div>
-        <Modal show={modal}/>
+        {modal && <Modal show={modal}/>}
       </div>
     </BrowserRouter>
   );

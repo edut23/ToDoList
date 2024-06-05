@@ -42,8 +42,8 @@ const Login: React.FC = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.username}
+                        style={errors.username  === 'Required' && touched.username ? {borderColor: "red"} : {}}
                     />
-                    <p style={{visibility: `${errors.username && touched.username && errors.username ? "visible" : "hidden"}`}}>{errors.username}</p>
                     <label>Password</label>
                     <input
                         type="password"
@@ -51,15 +51,15 @@ const Login: React.FC = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
+                        style={errors.password  === 'Required' && touched.password ? {borderColor: "red"} : {}}
                     />
-                    <p style={{visibility: `${errors.password && touched.password && errors.password ? "visible" : "hidden"}`}}>{errors.password}</p>
                     <button type="submit" disabled={(values.username === '') || (values.password === '')}>
                         Submit
                     </button>
                     </form>
                 )}
             </Formik>
-            <Link to="/register"><p>Sign Up</p></Link>
+            <p>Don't have a account yet? <Link to="/register">Sign Up!</Link></p>
         </div>
     )
 }

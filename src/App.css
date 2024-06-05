@@ -13,50 +13,78 @@
     color: #FFFFFF;
     -webkit-text-stroke: 1.5px #000000;
   }
+
+  input{
+    border-radius: 8px;
+  }
+
+  select{
+    border-radius: 8px;
+  }
+
+  button{
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #333333;
+    color: #FFFFFF;
+    margin-right: 5px;
+  }
 }
 
 .main{
   background-color: #FFFFFF;
   border-radius: 8px;
   border: solid 2px #000000;
-  min-width: 60%;
   min-height: 40%;
   padding: 1.5em;
   margin: 0 5%;
+
+  h2{
+    margin-top: 0;
+  }
 }
 
 .input{
   display: flex;
   flex-direction: column;
+
+  button{
+    font-size: 15px;
+  }
 }
 
 .form{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 2em;
-  margin-right: 2em;
   
   label{
-    margin: 0.5em;
     font-weight: 500;
   }
 
   input{
-    min-width: 40%;
-  }
-  
-  p{
-    color: red;
+    width: 100%;
     margin: 1em;
-    height: 1em;
-    font-style: italic;
   }
 }
 
 .table{
   width: -webkit-fill-available;
   margin-bottom: 1em;
+
+  th{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  td{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+.min40vw{
+  min-width: 40vw;
 }
 
 .modal{

@@ -7,15 +7,15 @@ interface ModalProps{
 }
 
 const Modal: React.FC<ModalProps> = (show) => {
-    const {createItem, updateItem} = useModal(show.show);
+    const {item, createItem, updateItem} = useModal(show.show);
     const {setModal} = useMyContext();
 
     return(
         <div className="modal" style={show.show ? {} :  {display: "none"}}>
             <div className="modalView">
-                <h2>Create or edit ToDo</h2>
+                <h2>{typeof show.show === 'boolean'? "Create " : "Edit "}ToDo</h2>
                 <Formik
-                initialValues={{ title: '', description: '', status: '' }}
+                initialValues={item}
                 validate={values => {
                     const errors = {title: '', description: '', status: '' };
                     if (!values.title)
@@ -36,6 +36,7 @@ const Modal: React.FC<ModalProps> = (show) => {
                 {({
                     values,
                     errors,
+                    touched,
                     handleChange,
                     handleBlur,
                     /* and other goodies */
@@ -58,7 +59,7 @@ const Modal: React.FC<ModalProps> = (show) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.title}
-                                    style={errors.title === 'Required' ? {borderColor: "red"} : {}}
+                                    style={errors.title === 'Required' && touched.title ? {borderColor: "red"} : {}}
                                 />
                             </td>
                             <td>
@@ -68,7 +69,7 @@ const Modal: React.FC<ModalProps> = (show) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
-                                    style={errors.description === 'Required' ? {borderColor: "red"} : {}}
+                                    style={errors.description === 'Required' && touched.description ? {borderColor: "red"} : {}}
                                 />
                             </td>
                             <td>
@@ -77,7 +78,7 @@ const Modal: React.FC<ModalProps> = (show) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.status}
-                                    style={errors.status === 'Required' ? {borderColor: "red"} : {}}
+                                    style={errors.status === 'Required' && touched.status ? {borderColor: "red"} : {}}
                                 >
                                     <option value="To do">To do</option>
                                     <option value="doing">Doing</option>

@@ -6,7 +6,7 @@ const List: React.FC = () => {
     return(
         <>
             <h2>List</h2>
-            <table className="table">
+            <table className="table min40vw">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -24,7 +24,7 @@ const List: React.FC = () => {
                         <td>{item.status}</td>
                         <td>{new Date(item.creation).toLocaleString('pt-br')}</td>
                         <td>
-                            <button onClick={() => setModal(item.itemid)}>edit</button> - <button onClick={() => removeItem(item.itemid)}>delete</button>
+                            <button onClick={() => setModal(item.itemid)}>Edit</button><button onClick={() => removeItem(item.itemid)}>Delete</button>
                         </td>
                     </tr>
                 ))}

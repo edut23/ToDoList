@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { createItems } from "../../api/createItems"
 import { updateItems } from "../../api/updateItems"
 import { useMyContext } from "../../context/myContext"
@@ -12,7 +13,9 @@ interface List{
 
 const useModal = (show: boolean | number) => {
     const {fetchData} = useList();
-    const {setModal} = useMyContext();
+    const {toDoList, setModal} = useMyContext();
+    const correctItem = toDoList.find(item => item.itemid === show);
+    const item = {title: correctItem?.title ?? '', description: correctItem?.description ?? '', status: correctItem?.status ?? ''}
 
     const createItem = async(values: List) => {
         if(typeof show === 'boolean'){
@@ -31,7 +34,7 @@ const useModal = (show: boolean | number) => {
         if(typeof show === 'number'){
             try{
                 await updateItems(values, show);
-                alert("Item created");
+                alert("Item updated");
                 await fetchData();
                 setModal(false);
             }catch(error){
@@ -40,7 +43,7 @@ const useModal = (show: boolean | number) => {
         }
     }
 
-    return {createItem, updateItem}
+    return {item, createItem, updateItem}
 }
 
 export default useModal;
