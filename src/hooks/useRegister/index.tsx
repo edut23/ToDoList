@@ -8,8 +8,9 @@ interface Login {
 const useRegister = () => {
     const handleSubmitRegister = async(values: Login) => {
         try{
+            console.log("foi")
             const response = await registerApi(values.username, values.password);
-            if(typeof response === "string")
+            if(typeof response !== "object")
                 alert("User created");
             else
                 alert("User already exist")

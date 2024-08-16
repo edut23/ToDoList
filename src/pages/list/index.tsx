@@ -4,7 +4,12 @@ const List: React.FC = () => {
     const {toDoList, removeItem, setModal} = useList();
 
     return(
-        <>
+        <div className="notesDiv">
+            <div className="createNote">
+                <h2>Título</h2>
+                <hr/>
+                <h3>Criar nota...</h3>
+            </div>
             <h2>List</h2>
             <table className="table min40vw">
                 <thead>
@@ -32,7 +37,7 @@ const List: React.FC = () => {
             </table>
             <button onClick={() => {localStorage.removeItem("token"); window.location.reload();}}>Exit</button>
             <button onClick={() => setModal(true)}>New</button>
-        </>
+        </div>
     )
 }
 

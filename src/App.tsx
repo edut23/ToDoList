@@ -5,6 +5,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import List from './pages/list';
 import Modal from './pages/modal';
+import noteimg from './assets/notes.png'
 
 function App() {
   const {modal} = useMyContext();
@@ -12,14 +13,15 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>ToDoList</h1>
-        <div className='main'>
-          <Routes>
+        <div className='header'>
+          <img src={noteimg}/>
+          <h1>CoreNotes</h1>
+        </div>
+        <Routes>
             <Route path="/" element={localStorage.getItem("token") === null ? <Login/> : <Navigate to="/list" replace/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/list" element={localStorage.getItem("token") !== null ? <List/> : <Navigate to="/" replace/>}/>
-          </Routes>
-        </div>
+        </Routes>
         {modal && <Modal show={modal}/>}
       </div>
     </BrowserRouter>
